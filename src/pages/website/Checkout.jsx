@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
+import { placeOrder } from '../../services/checkoutService';
 
 const Checkout = () => {
   const { cart, cartTotal, clearCart } = useCart();
@@ -24,27 +25,53 @@ const Checkout = () => {
     });
   };
 
- const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
+
   e.preventDefault();
 
   setIsProcessing(true);
 
-  setTimeout(() => {
+  try {
 
-    const orderId =
-      'SS' +
-      Math.floor(
-        100000 +
-        Math.random() * 900000
-      );
+    const orderData = {
 
-    setOrderNumber(orderId);
+      fullName: formData.fullName,
 
-    setIsProcessing(false);
+      email: formData.email,
+
+      city: formData.city,
+
+      address: formData.address,
+
+      paymentMethod: "Cash On Delivery",
+
+      totalAmount: cartTotal,
+
+      cart: cart
+
+    };
+
+    console.log(cart);
+    console.log(orderData);
+
+    const response = await placeOrder(orderData);
+
+    setOrderNumber(response.orderId);
 
     setShowModal(true);
 
-  }, 1500);
+  } catch (err) {
+
+    console.log(err);
+
+    alert("Failed to place order");
+
+  } finally {
+
+    setIsProcessing(false);
+
+  }
+
 };
 
 const handleModalClose = () => {
@@ -75,27 +102,27 @@ const handleModalClose = () => {
         <form id="checkout-form" className="checkout-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="fullName">Full Name <span>*</span></label>
-            <input type="text" id="fullName" required onChange={handleChange} />
+            <input type="text" id="fullName" value={formData.fullName} required onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label htmlFor="email">Email Address <span>*</span></label>
-            <input type="email" id="email" required onChange={handleChange} />
+            <input type="email" id="email" value={formData.email} required onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label htmlFor="phone">Phone Number <span>*</span></label>
-            <input type="tel" id="phone" required onChange={handleChange} />
+            <input type="tel" id="phone" value={formData.phone} required onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label htmlFor="city">City <span>*</span></label>
-            <input type="text" id="city" required onChange={handleChange} />
+            <input type="text" id="city" value={formData.city} required onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label htmlFor="address">Shipping Address <span>*</span></label>
-            <textarea id="address" rows="4" required onChange={handleChange}></textarea>
+            <textarea id="address" value={formData.address} rows="4" required onChange={handleChange}></textarea>
           </div>
 
           <button 
@@ -112,7 +139,7 @@ const handleModalClose = () => {
       <aside className="checkout-summary">
         <h2>Order Summary</h2>
         {cart.map(item => (
-          <div key={item.id} className="summary-item">
+          <div key={item.product_id} className="summary-item">
             <span>{item.name} × {item.quantity}</span>
             <span>Rs. {item.price * item.quantity}</span>
           </div>
@@ -156,7 +183,7 @@ const handleModalClose = () => {
         {cart.map((item) => (
 
           <div
-            key={item.id}
+            key={item.product_id}
             className="summary-item"
           >
 

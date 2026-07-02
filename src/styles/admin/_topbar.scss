@@ -1,0 +1,96 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.topbar {
+
+    height: $topbar-height;
+
+    background: white;
+
+    box-shadow: $shadow-sm;
+
+    padding: 0 30px;
+
+    border-bottom: 3px solid #e5e7eb;
+
+    @include flex-between;
+
+    h1 {
+
+        font-size: 26px;
+
+        font-weight: 700;
+
+    }
+
+    .topbar-right {
+
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+    }
+
+    .notification-btn {
+
+        width: 45px;
+
+        height: 45px;
+
+        border-radius: 50%;
+
+        border: none;
+
+        cursor: pointer;
+
+        background: #eef2ff;
+
+        @include flex-center;
+
+        color: $primary;
+
+        font-size: 18px;
+
+        transition: $transition;
+
+        &:hover {
+
+            background: $primary;
+
+            color: white;
+
+        }
+
+    }
+
+    .admin-user {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        background: #f1f5f9;
+
+        padding: 8px 15px;
+
+        border-radius: 50px;
+
+        svg {
+
+            font-size: 28px;
+
+            color: $primary;
+
+        }
+
+        span {
+
+            font-weight: 600;
+
+        }
+
+    }
+
+}

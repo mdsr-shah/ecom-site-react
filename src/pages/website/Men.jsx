@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useCart } from '../context/CartContext';
-import ProductGrid from '../components/product/ProductGrid';
-import CartDrawer from '../components/layout/CartDrawer';
-import CategoryDirectory from '../components/category/Category'
-import { menCategories } from '../data/menCategories';
+import { useCart } from '../../context/CartContext';
+import ProductGrid from '../../components/product/ProductGrid';
+import CartDrawer from '../../components/layout/CartDrawer';
+import CategoryDirectory from '../../components/category/Category'
+import { menCategories } from '../../data/menCategories';
 import axios from 'axios'; 
 
 const Men = () => {

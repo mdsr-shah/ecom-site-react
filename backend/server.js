@@ -3,6 +3,12 @@ const cors = require("cors");
 require("dotenv").config();
 
 const productRoutes = require("./routes/productRoutes");
+const authRoutes = require("./routes/authRoutes")
+const dashboardRoutes = require("./routes/dashboardRoutes");
+const checkoutRoutes = require("./routes/checkoutRoutes");
+const orderRoutes = require("./routes/orderRoutes");
+const customerRoutes = require("./routes/customerRoutes");
+const settingsRoutes = require("./routes/settingsRoutes");
 
 const app = express();
 
@@ -12,6 +18,12 @@ app.use(express.json());
 
 // Routes
 app.use("/products", productRoutes);
+app.use("/auth",authRoutes);
+app.use("/dashboard",dashboardRoutes)
+app.use("/checkout",checkoutRoutes);
+app.use("/orders",orderRoutes)
+app.use("/customers",customerRoutes)
+app.use("/settings",settingsRoutes)
 
 // Test Route
 app.get("/", (req, res) => {

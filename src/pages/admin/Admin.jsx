@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import ProductForm from "../components/admin/ProductForm";
-import ProductTable from "../components/admin/ProductTable";
-import { getProducts } from "../services/productService";
+import ProductTable from "../../components/admin/ProductTable";
+import { getProducts } from "../../services/productService";
 
 const Admin = () => {
   const [products, setProducts] = useState([]);
+  const [editingProduct, setEditingProduct] = useState(null);
 
   const fetchProducts = async () => {
     try {
@@ -23,11 +24,16 @@ const Admin = () => {
     <main className="admin-page">
       <h1>Admin Dashboard</h1>
 
-      <ProductForm fetchProducts={fetchProducts} />
+      <ProductForm
+        fetchProducts={fetchProducts}
+        editingProduct={editingProduct}
+        setEditingProduct={setEditingProduct}
+      />
 
       <ProductTable
-        products={products}
-        fetchProducts={fetchProducts}
+         products={products}
+         fetchProducts={fetchProducts}
+         setEditingProduct={setEditingProduct}
       />
     </main>
   );

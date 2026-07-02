@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useCart } from '../context/CartContext';
-import ProductGrid from '../components/product/ProductGrid';
-import CartDrawer from '../components/layout/CartDrawer';
-import CategoryDirectory from '../components/category/Category'
-import { womenCategories } from '../data/womenCategories';
+import { useCart } from '../../context/CartContext';
+import ProductGrid from '../../components/product/ProductGrid';
+import CartDrawer from '../../components/layout/CartDrawer';
+import CategoryDirectory from '../../components/category/Category'
+import { womenCategories } from '../../data/womenCategories';
+import SearchOverlay from '../../components/website/SearchOverlay';
 import axios from 'axios';
 
 const Home = () => {
@@ -12,6 +13,8 @@ const Home = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [visibleProducts, setVisibleProducts] = useState(9);
   const { addToCart } = useCart();
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
 useEffect(() => {
   axios
@@ -28,7 +31,7 @@ useEffect(() => {
 
   const handleAddToCart = (product) => {
     const cartProduct = {
-      id: product.id,
+      id: product._product_id,
       name: product.title,
       price: Math.round(product.price * 280), // Convert to PKR
       image: product.thumbnail

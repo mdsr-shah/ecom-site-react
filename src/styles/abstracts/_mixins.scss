@@ -1,0 +1,91 @@
+@use "variables" as *;
+
+
+// FLEX
+
+@mixin flex-between{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+@mixin flex-center{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+@mixin flex-column{
+    display:flex;
+    flex-direction:column;
+}
+
+
+// CARD
+
+@mixin card{
+
+    background:$white;
+
+    border-radius:$radius;
+
+    box-shadow:$shadow-sm;
+
+    padding:20px;
+}
+
+
+// BUTTON
+
+@mixin button($bg){
+
+    background:$bg;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:12px 22px;
+
+    cursor:pointer;
+
+    transition:$transition;
+
+    font-weight:600;
+
+    &:hover{
+
+        transform:translateY(-2px);
+
+        box-shadow:$shadow-md;
+
+    }
+
+}
+
+
+// INPUT
+
+@mixin input{
+
+    width:100%;
+
+    padding:12px 15px;
+
+    border:1px solid $border;
+
+    border-radius:8px;
+
+    outline:none;
+
+    transition:$transition;
+
+    &:focus{
+
+        border-color:$primary;
+
+    }
+
+}

@@ -17,7 +17,7 @@ const ProductModal = ({ product, isOpen, onClose }) => {
     }
 
     addToCart({
-      id: product.id,
+      product_id: product.product_id,
       name: product.title,
       price: price,
       image: product.thumbnail,

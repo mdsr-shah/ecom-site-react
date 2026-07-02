@@ -27,7 +27,7 @@ const ProductCard = ({ product }) => {
           onClick={(e) => {
             e.stopPropagation();
             addToCart({
-              id: product.id,
+              product_id: product.product_id,
               name: product.title,
               price: price,
               image: product.image_url

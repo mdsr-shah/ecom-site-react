@@ -1,0 +1,88 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.orders-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: .85rem;
+  font-weight: 600;
+  color: white;
+  text-transform: capitalize;
+}
+
+.status.pending {
+  background: #f39c12;
+}
+
+.status.processing {
+  background: #3498db;
+}
+
+.status.shipped {
+  background: #8e44ad;
+}
+
+.status.delivered {
+  background: #2ecc71;
+}
+
+.status.cancelled {
+  background: #e74c3c;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 0;
+  border-bottom: 1px solid #ececec;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  img {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+  }
+
+  h4 {
+    margin-bottom: 5px;
+    font-size: .95rem;
+  }
+
+  p {
+    color: #777;
+    margin: 2px 0;
+  }
+}
+
+.admin-order-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255,0,0,.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+}
+
+.admin-order-modal{
+    width:700px;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+}

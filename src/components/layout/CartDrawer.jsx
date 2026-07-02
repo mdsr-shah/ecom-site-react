@@ -64,7 +64,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
               {cart.map((item) => (
 
                 <div
-                  key={item.id}
+                  key={item.product_id}
                   className="cart-item"
                 >
 
@@ -93,7 +93,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
                       <button
                         className="qty-btn"
                         onClick={() =>
-                          changeQuantity(item.id, -1)
+                          changeQuantity(item.product_id, -1)
                         }
                       >
                         -
@@ -108,7 +108,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
                       <button
                         className="qty-btn"
                         onClick={() =>
-                          changeQuantity(item.id, 1)
+                          changeQuantity(item.product_id, 1)
                         }
                       >
                         +
@@ -129,7 +129,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
                     <button
                       className="remove-item-btn"
                       onClick={() =>
-                        removeFromCart(item.id)
+                        removeFromCart(item.product_id)
                       }
                     >
                       Remove

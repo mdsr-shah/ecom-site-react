@@ -3,9 +3,14 @@ import { deleteProduct } from "../../services/productService";
 
 
 
-const ProductTable = ({ products,fetchProducts }) => {
+const ProductTable = ({
+    products,
+    fetchProducts,
+    setEditingProduct,
+    setShowModal
+}) => {
   
-    const handleDelete = async (id) => {
+  const handleDelete = async (id) => {
   const confirmDelete = window.confirm(
     "Are you sure you want to delete this product?"
   );
@@ -65,7 +70,11 @@ const ProductTable = ({ products,fetchProducts }) => {
               <td>{product.category_id}</td>
 
               <td>
-                <button>Edit</button>
+                <button
+    onClick={() => {
+        setEditingProduct(product);
+        setShowModal(true);
+    }}>Edit</button>
                 <button onClick={()=> handleDelete(product.product_id)}>Delete</button>
               </td>
             </tr>

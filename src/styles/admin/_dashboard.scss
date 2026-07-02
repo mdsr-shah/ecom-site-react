@@ -1,0 +1,194 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.dashboard-page {
+
+  h1 {
+    margin-bottom: 30px;
+    font-size: 34px;
+    font-weight: 700;
+  }
+
+}
+
+/* ===========================
+   DASHBOARD CARDS
+=========================== */
+
+.dashboard-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+  gap: 25px;
+
+  margin-bottom: 35px;
+
+}
+
+.dashboard-card {
+
+  background: #fff;
+
+  border-radius: 14px;
+
+  padding: 25px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,.06);
+
+  transition: .25s;
+
+  cursor: pointer;
+
+}
+
+.dashboard-card:hover {
+
+  transform: translateY(-5px);
+
+}
+
+.dashboard-card-content {
+
+  h4 {
+
+    color: #6b7280;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    margin-bottom: 10px;
+
+  }
+
+  h2 {
+
+    font-size: 34px;
+
+    font-weight: 700;
+
+    color: #111827;
+
+  }
+
+}
+
+.dashboard-card-icon {
+
+  font-size: 42px;
+
+}
+
+/* ===========================
+   LOWER SECTION
+=========================== */
+
+.dashboard-bottom {
+
+  display: grid;
+
+  grid-template-columns: 2fr 1fr;
+
+  gap: 25px;
+
+}
+
+.recent-orders,
+.low-stock-list {
+
+  background: #fff;
+
+  border-radius: 14px;
+
+  padding: 25px;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,.06);
+
+}
+
+.recent-orders h2,
+.low-stock-list h2 {
+
+  margin-bottom: 20px;
+
+}
+
+.recent-orders table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+}
+
+.recent-orders th {
+
+  text-align: left;
+
+  padding: 15px;
+
+  background: #f8fafc;
+
+  font-weight: 600;
+
+}
+
+.recent-orders td {
+
+  padding: 15px;
+
+  border-top: 1px solid #eee;
+
+}
+
+.stock-item {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid #eee;
+
+}
+
+.stock-item:last-child {
+
+  border-bottom: none;
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 900px) {
+
+  .dashboard-bottom {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .dashboard-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}

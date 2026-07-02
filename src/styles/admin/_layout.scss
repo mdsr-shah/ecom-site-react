@@ -1,0 +1,42 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: $background;
+    font-family: "Poppins", sans-serif;
+    color: $text-dark;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+}
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+    background: $background;
+}
+
+.admin-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: $sidebar-width;
+    min-height: 100vh;
+}
+
+.admin-content {
+    flex: 1;
+    padding: 30px;
+}

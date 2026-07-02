@@ -1,0 +1,80 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.btn{
+
+    @include button($primary);
+
+}
+
+.btn-danger{
+
+    @include button($danger);
+
+}
+
+.btn-success{
+
+    @include button($success);
+
+}
+
+.btn-warning{
+
+    @include button($warning);
+
+}
+
+button{
+
+    cursor:pointer;
+
+}
+
+.product-table{
+
+    td:last-child{
+
+        display:flex;
+
+        gap:10px;
+
+    }
+
+    td button{
+
+        padding:10px 15px;
+
+        border:none;
+
+        border-radius:8px;
+
+        color:white;
+
+        transition:$transition;
+
+        font-weight:600;
+
+    }
+
+    td button:first-child{
+
+        background:$warning;
+
+    }
+
+    td button:last-child{
+
+        background:$danger;
+
+    }
+
+    td button:hover{
+
+        transform:translateY(-2px);
+
+        box-shadow:$shadow-sm;
+
+    }
+
+}

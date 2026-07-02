@@ -1,0 +1,53 @@
+@use "../abstracts/variables" as *;
+
+.settings-page {
+
+  background: white;
+
+  padding: 30px;
+
+  border-radius: 12px;
+
+  h2 {
+
+    margin-bottom: 30px;
+
+  }
+
+}
+
+.settings-form {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+
+  max-width: 500px;
+
+}
+
+.settings-form label {
+
+  font-weight: 600;
+
+}
+
+.settings-form input {
+
+  padding: 14px;
+
+  border: 1px solid $border;
+
+  border-radius: 8px;
+
+}
+
+.settings-form button {
+
+  margin-top: 15px;
+
+  width: 180px;
+
+}

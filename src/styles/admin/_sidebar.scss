@@ -1,0 +1,113 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.sidebar {
+
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: $sidebar-width;
+    height: 100vh;
+
+    background: $sidebar-bg;
+
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: $shadow-md;
+
+    z-index: 1000;
+
+    .sidebar-logo {
+
+        padding: 30px 25px;
+
+        border-bottom: 1px solid rgba(255,255,255,.08);
+
+        h2 {
+
+            font-size: 24px;
+            font-weight: 700;
+
+        }
+
+        span {
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+        }
+
+    }
+
+    .sidebar-nav {
+
+        flex: 1;
+
+        padding: 25px 15px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        a {
+
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            padding: 14px 18px;
+
+            border-radius: 10px;
+
+            transition: $transition;
+
+            font-weight: 500;
+
+            svg {
+
+                font-size: 18px;
+
+            }
+
+            &:hover {
+
+                background: $sidebar-hover;
+
+            }
+
+            &.active {
+
+                background: $primary;
+
+            }
+
+        }
+
+    }
+
+    .sidebar-footer {
+
+        padding: 20px;
+
+        button {
+
+            width: 100%;
+
+            @include button($danger);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+        }
+
+    }
+
+}

@@ -5,10 +5,10 @@ const CartContext = createContext();
 const cartReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_TO_CART':
-      const existingItem = state.find(item => item.id === action.payload.id);
+      const existingItem = state.find(item => item.product_id === action.payload.product_id);
       if (existingItem) {
         return state.map(item =>
-          item.id === action.payload.id
+          item.product_id === action.payload.product_id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
@@ -16,11 +16,11 @@ const cartReducer = (state, action) => {
       return [...state, { ...action.payload, quantity: 1 }];
 
     case 'REMOVE_FROM_CART':
-      return state.filter(item => item.id !== action.payload);
+      return state.filter(item => item.product_id !== action.payload);
 
     case 'CHANGE_QUANTITY':
       return state.map(item =>
-        item.id === action.payload.id
+        item.product_id === action.payload.product_id
           ? { ...item, quantity: Math.max(1, item.quantity + action.payload.change) }
           : item
       );
@@ -44,21 +44,35 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem('superstore_cart', JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product) => {
-    dispatch({ type: 'ADD_TO_CART', payload: product });
-  };
+ const addToCart = (product) => {
+  dispatch({
+    type: "ADD_TO_CART",
+    payload: product
+  });
+};
 
-  const removeFromCart = (id) => {
-    dispatch({ type: 'REMOVE_FROM_CART', payload: id });
-  };
+const removeFromCart = (product_id) => {
+  dispatch({
+    type: "REMOVE_FROM_CART",
+    payload: product_id
+  });
+};
 
-  const changeQuantity = (id, change) => {
-    dispatch({ type: 'CHANGE_QUANTITY', payload: { id, change } });
-  };
+const changeQuantity = (product_id, change) => {
+  dispatch({
+    type: "CHANGE_QUANTITY",
+    payload: {
+      product_id,
+      change
+    }
+  });
+};
 
-  const clearCart = () => {
-    dispatch({ type: 'CLEAR_CART' });
-  };
+const clearCart = () => {
+  dispatch({
+    type: "CLEAR_CART"
+  });
+};
 
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   const cartTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
