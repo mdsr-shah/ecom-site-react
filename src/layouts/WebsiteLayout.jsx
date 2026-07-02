@@ -1,19 +1,27 @@
-import { Outlet } from "react-router-dom";
+import { useState } from "react";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
+import SearchOverlay from "../components/website/SearchOverlay";
+import { Outlet } from "react-router-dom";
 
-const WebsiteLayout = () => {
+export default function WebsiteLayout() {
+
+  const [searchOpen, setSearchOpen] = useState(false);
+
   return (
     <>
-      <Header />
+      <Header
+        onSearchClick={() => setSearchOpen(true)}
+      />
 
-      <main>
-        <Outlet />
-      </main>
+      <SearchOverlay
+        isOpen={searchOpen}
+        onClose={() => setSearchOpen(false)}
+      />
+
+      <Outlet />
 
       <Footer />
     </>
   );
-};
-
-export default WebsiteLayout;
+}

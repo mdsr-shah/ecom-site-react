@@ -4,7 +4,7 @@ import { useCart } from '../../context/CartContext';
 import { ShoppingCart, Search, User, Heart } from 'lucide-react';
 import CartDrawer from './CartDrawer';
 
-const Header = () => {
+const Header = ({onSearchClick}) => {
   const { cartCount } = useCart();
   const [isCartOpen, setIsCartOpen] = useState(false);
 
@@ -30,7 +30,7 @@ const Header = () => {
         <nav className="utility-nav">
           <ul className="utility-nav__list">
             <li>
-              <button className="utility-nav__icon">
+              <button onClick={onSearchClick} className="utility-nav__icon">
                 <Search size={22} strokeWidth={2} />
               </button>
             </li>

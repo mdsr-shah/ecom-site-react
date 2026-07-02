@@ -11,7 +11,7 @@ const Settings = () => {
 
   const [form, setForm] = useState({
 
-    full_name: "",
+    username: "",
 
     email: "",
 
@@ -78,7 +78,7 @@ const Settings = () => {
 
         <label>
 
-          Full Name
+          Username
 
         </label>
 
@@ -86,9 +86,9 @@ const Settings = () => {
 
           type="text"
 
-          name="full_name"
+          name="username"
 
-          value={form.full_name}
+          value={form.username}
 
           onChange={handleChange}
 

@@ -1,13 +1,52 @@
-import { X, Search } from "lucide-react";
+import { useState, useEffect, useMemo } from "react";
+import axios from "axios";
+import { Search, X } from "lucide-react";
 
-const SearchOverlay = ({
-  isOpen,
-  onClose,
-  searchTerm,
-  setSearchTerm,
-  results,
-  onProductClick,
-}) => {
+const SearchOverlay = ({ isOpen, onClose }) => {
+  const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    axios
+      .get("http://localhost:5000/products")
+      .then((res) => setProducts(res.data))
+      .catch((err) => console.log(err));
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+
+    if (isOpen) {
+      document.addEventListener("keydown", handleEsc);
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen, onClose]);
+
+  const filteredProducts = useMemo(() => {
+    if (!searchTerm.trim()) return [];
+
+    return products.filter((product) => {
+      return (
+        product.title
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        (product.description &&
+          product.description
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()))
+      );
+    });
+  }, [products, searchTerm]);
+
   if (!isOpen) return null;
 
   return (
@@ -15,7 +54,7 @@ const SearchOverlay = ({
       <div
         className="search-backdrop"
         onClick={onClose}
-      />
+      ></div>
 
       <div className="search-overlay">
 
@@ -23,9 +62,13 @@ const SearchOverlay = ({
 
           <div>
 
-            <h3>Search Super Store</h3>
+            <span className="search-small-title">
+              SEARCH
+            </span>
 
-            <h1>What are you looking for?</h1>
+            <h2>
+              What are you looking for?
+            </h2>
 
           </div>
 
@@ -33,7 +76,7 @@ const SearchOverlay = ({
             className="search-close"
             onClick={onClose}
           >
-            <X size={28} />
+            <X size={30} />
           </button>
 
         </div>
@@ -47,44 +90,64 @@ const SearchOverlay = ({
             type="text"
             placeholder="Search products..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) =>
+              setSearchTerm(e.target.value)
+            }
           />
 
         </div>
 
         <div className="quick-search">
 
-          <button onClick={() => setSearchTerm("Cotton")}>Cotton</button>
-          <button onClick={() => setSearchTerm("Linen")}>Linen</button>
-          <button onClick={() => setSearchTerm("Dress")}>Dress</button>
-          <button onClick={() => setSearchTerm("Sale")}>Sale</button>
+          <button onClick={() => setSearchTerm("Dress")}>
+            Dress
+          </button>
+
+          <button onClick={() => setSearchTerm("Shoes")}>
+            Shoes
+          </button>
+
+          <button onClick={() => setSearchTerm("Jeans")}>
+            Jeans
+          </button>
+
+          <button onClick={() => setSearchTerm("Cotton")}>
+            Cotton
+          </button>
+
+          <button onClick={() => setSearchTerm("Kids")}>
+            Kids
+          </button>
 
         </div>
 
         <div className="search-results">
 
-          {searchTerm.trim() === "" ? (
+          {searchTerm === "" ? (
 
-            <p className="search-placeholder">
+            <div className="search-placeholder">
+
               Start typing to search products...
-            </p>
 
-          ) : results.length === 0 ? (
+            </div>
 
-            <p className="search-placeholder">
-              No products found.
-            </p>
+          ) : filteredProducts.length === 0 ? (
+
+            <div className="search-placeholder">
+
+              No matching products found.
+
+            </div>
 
           ) : (
 
             <div className="search-grid">
 
-              {results.map((product) => (
+              {filteredProducts.map((product) => (
 
                 <div
-                  key={product.product_id}
                   className="search-card"
-                  onClick={() => onProductClick(product)}
+                  key={product.product_id}
                 >
 
                   <img
@@ -92,11 +155,19 @@ const SearchOverlay = ({
                     alt={product.title}
                   />
 
-                  <h4>{product.title}</h4>
+                  <div className="search-card-body">
 
-                  <span>
-                    Rs. {product.price}
-                  </span>
+                    <h4>{product.title}</h4>
+
+                    <p>
+                      {product.description}
+                    </p>
+
+                    <span>
+                      Rs. {product.price}
+                    </span>
+
+                  </div>
 
                 </div>
 

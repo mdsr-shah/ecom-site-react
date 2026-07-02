@@ -5,7 +5,7 @@ const getAdmin = async () => {
   const result = await db.query(`
     SELECT
       admin_id,
-      full_name,
+      username,
       email
     FROM admin
     LIMIT 1
@@ -27,14 +27,14 @@ const updateAdmin = async (
 
     SET
 
-      full_name=$1,
+      username=$1,
       email=$2,
       password=$3
 
     WHERE admin_id=1
     `,
     [
-      full_name,
+      username,
       email,
       password
     ]

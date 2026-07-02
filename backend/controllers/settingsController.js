@@ -30,7 +30,7 @@ const updateSettings = async (req, res) => {
 
     const {
 
-      full_name,
+      username,
       email,
       password
 
@@ -38,7 +38,7 @@ const updateSettings = async (req, res) => {
 
     await Settings.updateAdmin(
 
-      full_name,
+      username,
       email,
       password
 
