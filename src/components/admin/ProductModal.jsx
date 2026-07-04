@@ -8,6 +8,7 @@ const ProductModal = ({
   editingProduct,
   setEditingProduct,
 }) => {
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -18,7 +19,9 @@ const ProductModal = ({
   });
 
   useEffect(() => {
+
     if (editingProduct) {
+
       setFormData({
         title: editingProduct.title,
         description: editingProduct.description,
@@ -27,7 +30,9 @@ const ProductModal = ({
         category_id: editingProduct.category_id,
         image_url: editingProduct.image_url,
       });
+
     } else {
+
       setFormData({
         title: "",
         description: "",
@@ -36,55 +41,82 @@ const ProductModal = ({
         category_id: "",
         image_url: "",
       });
+
     }
+
   }, [editingProduct]);
 
   const handleChange = (e) => {
+
     setFormData({
+
       ...formData,
+
       [e.target.name]: e.target.value,
+
     });
+
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
 
     try {
+
       if (editingProduct) {
+
         await updateProduct(editingProduct.product_id, formData);
+
         alert("Product Updated!");
+
       } else {
+
         await createProduct(formData);
+
         alert("Product Added!");
+
       }
 
       fetchProducts();
 
       setShowModal(false);
+
       setEditingProduct(null);
+
     } catch (err) {
+
       console.error(err);
+
       alert("Operation Failed");
+
     }
+
   };
 
   if (!showModal) return null;
 
   return (
-    <div className="modal-overlay">
 
-      <div className="product-modal">
+    <div className="admin-modal-overlay">
 
-        <div className="modal-header">
+      <div className="admin-modal">
+
+        <div className="admin-modal-header">
 
           <h2>
+
             {editingProduct ? "Edit Product" : "Add Product"}
+
           </h2>
 
           <button
             onClick={() => {
+
               setShowModal(false);
+
               setEditingProduct(null);
+
             }}
           >
             ✕
@@ -92,90 +124,111 @@ const ProductModal = ({
 
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <div className="admin-modal-body">
 
-          <input
-            name="title"
-            placeholder="Title"
-            value={formData.title}
-            onChange={handleChange}
-            required
-          />
-
-          <textarea
-            name="description"
-            placeholder="Description"
-            value={formData.description}
-            onChange={handleChange}
-            required
-          />
-
-          <input
-            type="number"
-            name="price"
-            placeholder="Price"
-            value={formData.price}
-            onChange={handleChange}
-            required
-          />
-
-          <input
-            type="number"
-            name="stock"
-            placeholder="Stock"
-            value={formData.stock}
-            onChange={handleChange}
-            required
-          />
-
-          <select
-            name="category_id"
-            value={formData.category_id}
-            onChange={handleChange}
-            required
+          <form
+            className="admin-form"
+            onSubmit={handleSubmit}
           >
-            <option value="">Select Category</option>
-            <option value="1">Women</option>
-            <option value="2">Men</option>
-            <option value="3">Kids</option>
-          </select>
 
-          <input
-            name="image_url"
-            placeholder="Image URL"
-            value={formData.image_url}
-            onChange={handleChange}
-            required
-          />
+            <input
+              name="title"
+              placeholder="Title"
+              value={formData.title}
+              onChange={handleChange}
+              required
+            />
 
-          <div className="modal-buttons">
+            <textarea
+              name="description"
+              placeholder="Description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+            />
 
-            <button
-              type="button"
-              className="btn-danger"
-              onClick={() => {
-                setShowModal(false);
-                setEditingProduct(null);
-              }}
+            <input
+              type="number"
+              name="price"
+              placeholder="Price"
+              value={formData.price}
+              onChange={handleChange}
+              required
+            />
+
+            <input
+              type="number"
+              name="stock"
+              placeholder="Stock"
+              value={formData.stock}
+              onChange={handleChange}
+              required
+            />
+
+            <select
+              name="category_id"
+              value={formData.category_id}
+              onChange={handleChange}
+              required
             >
-              Cancel
-            </button>
 
-            <button
-              type="submit"
-              className="btn-success"
-            >
-              {editingProduct ? "Update Product" : "Save Product"}
-            </button>
+              <option value="">Select Category</option>
 
-          </div>
+              <option value="1">Women</option>
 
-        </form>
+              <option value="2">Men</option>
+
+              <option value="3">Kids</option>
+
+            </select>
+
+            <input
+              name="image_url"
+              placeholder="Image URL"
+              value={formData.image_url}
+              onChange={handleChange}
+              required
+            />
+
+            <div className="admin-modal-footer">
+
+              <button
+                type="button"
+                className="btn-danger"
+                onClick={() => {
+
+                  setShowModal(false);
+
+                  setEditingProduct(null);
+
+                }}
+              >
+
+                Cancel
+
+              </button>
+
+              <button
+                type="submit"
+                className="btn-success"
+              >
+
+                {editingProduct ? "Update Product" : "Save Product"}
+
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
 
       </div>
 
     </div>
+
   );
+
 };
 
 export default ProductModal;

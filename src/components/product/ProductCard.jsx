@@ -1,45 +1,61 @@
-import { useCart } from '../../context/CartContext';
+import { useCart } from "../../context/CartContext";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({
+  product,
+  onShowDetails
+}) => {
+
   const { addToCart } = useCart();
-  const price = Number(product.price);
 
   return (
+
     <article className="product-card">
-      <img 
-        src={product.image_url} 
-        alt={product.title} 
+
+      <img
+        src={product.image_url}
+        alt={product.title}
         className="product-image"
       />
-      
+
       <div className="product-info">
+
         <h3>{product.title}</h3>
-        
+
         <p className="product-description">
-          {product.description ? product.description.substring(0, 75) + '...' : ''}
-        </p>
-        
-        <p className="product-price">
-          <strong>Rs. {price}</strong>
+          {product.description?.substring(0,70)}...
         </p>
 
-        <button 
-          onClick={(e) => {
-            e.stopPropagation();
-            addToCart({
-              product_id: product.product_id,
-              name: product.title,
-              price: price,
-              image: product.image_url
-            });
-          }}
+        <p className="product-price">
+          Rs. {product.price}
+        </p>
+
+        <button
+          className="details-btn"
+          onClick={() => onShowDetails(product)}
+        >
+          Show Details
+        </button>
+
+        <button
           className="add-to-cart-btn"
+          onClick={() =>
+            addToCart({
+              id: product.product_id,
+              name: product.title,
+              price: product.price,
+              image: product.image_url
+            })
+          }
         >
           Add To Cart
         </button>
+
       </div>
+
     </article>
+
   );
+
 };
 
 export default ProductCard;

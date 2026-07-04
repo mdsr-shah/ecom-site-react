@@ -67,14 +67,13 @@ const ProductTable = ({
 
               <td>{product.stock}</td>
 
-              <td>{product.category_id}</td>
+              <td>{product.category_name}</td>
 
               <td>
-                <button
-    onClick={() => {
-        setEditingProduct(product);
-        setShowModal(true);
-    }}>Edit</button>
+                <button onClick={() => {
+                   setEditingProduct(product);
+                    setShowModal(true);
+                 }}>Edit</button>
                 <button onClick={()=> handleDelete(product.product_id)}>Delete</button>
               </td>
             </tr>

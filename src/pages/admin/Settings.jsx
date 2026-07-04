@@ -131,7 +131,7 @@ const Settings = () => {
         />
 
         <button
-          className="btn-primary"
+          className="btn-success"
         >
 
           Save Changes

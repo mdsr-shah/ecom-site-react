@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { updateOrderStatus } from "../../services/orderService";
-// import "../../styles/admin/orderModal.css";
 
 const OrderModal = ({
   selectedOrder,
@@ -12,29 +11,38 @@ const OrderModal = ({
   const [status, setStatus] = useState("");
 
   useEffect(() => {
+
     if (selectedOrder) {
+
       setStatus(selectedOrder.order.order_status);
+
     }
+
   }, [selectedOrder]);
 
   if (!showModal || !selectedOrder) return null;
 
   const handleSave = async () => {
+
     await updateOrderStatus(
+
       selectedOrder.order.order_id,
+
       status
+
     );
 
     fetchOrders();
 
     setShowModal(false);
+
   };
 
   return (
 
     <div className="admin-modal-overlay">
 
-      <div className="admin-order-modal">
+      <div className="admin-modal">
 
         <div className="admin-modal-header">
 
@@ -52,82 +60,86 @@ const OrderModal = ({
 
         </div>
 
-        <div className="admin-customer-section">
+        <div className="admin-modal-body">
 
-          <h3>Customer Information</h3>
+          <div className="admin-customer-section">
 
-          <p><strong>Name:</strong> {selectedOrder.order.full_name}</p>
+            <h3>Customer Information</h3>
 
-          <p><strong>Email:</strong> {selectedOrder.order.email}</p>
+            <p><strong>Name:</strong> {selectedOrder.order.full_name}</p>
 
-          <p><strong>Address:</strong> {selectedOrder.order.shipping_address}</p>
+            <p><strong>Email:</strong> {selectedOrder.order.email}</p>
 
-        </div>
+            <p><strong>Address:</strong> {selectedOrder.order.shipping_address}</p>
 
-        <hr />
+          </div>
 
-        <div className="admin-products-section">
+          <hr />
 
-          <h3>Products</h3>
+          <div className="admin-products-section">
 
-          {
+            <h3>Products</h3>
 
-            selectedOrder.items.map(item => (
+            {
 
-              <div
-                className="order-item"
-                key={item.order_item_id}
-              >
+              selectedOrder.items.map(item => (
 
-                <img
-                  src={item.image_url}
-                  alt={item.title}
-                />
+                <div
+                  className="order-item"
+                  key={item.order_item_id}
+                >
 
-                <div className="admin-order-details">
+                  <img
+                    src={item.image_url}
+                    alt={item.title}
+                  />
 
-                  <h4>{item.title}</h4>
+                  <div className="admin-order-details">
 
-                  <p>Quantity : {item.quantity}</p>
+                    <h4>{item.title}</h4>
 
-                  <p>Rs. {item.price}</p>
+                    <p>Quantity : {item.quantity}</p>
+
+                    <p>Rs. {item.price}</p>
+
+                  </div>
 
                 </div>
 
-              </div>
+              ))
 
-            ))
+            }
 
-          }
+          </div>
+
+          <hr />
+
+          <div className="admin-status-section">
+
+            <h3>Order Status</h3>
+
+            <select
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
+
+              <option>Pending</option>
+
+              <option>Processing</option>
+
+              <option>Shipped</option>
+
+              <option>Delivered</option>
+
+              <option>Cancelled</option>
+
+            </select>
+
+          </div>
 
         </div>
 
-        <hr />
-
-        <div className="admin-status-section">
-
-          <h3>Order Status</h3>
-
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-          >
-
-            <option>Pending</option>
-
-            <option>Processing</option>
-
-            <option>Shipped</option>
-
-            <option>Delivered</option>
-
-            <option>Cancelled</option>
-
-          </select>
-
-        </div>
-
-        <div className="admin-modal-buttons">
+        <div className="admin-modal-footer">
 
           <button
             className="btn-primary"

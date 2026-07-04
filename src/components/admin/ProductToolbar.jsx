@@ -17,10 +17,10 @@ const ProductToolbar = ({
         </div>
 
         <button
-          className="btn btn-primary"
+          className="btn btn-primary add-btn"
           onClick={() => setShowModal(true)}
         >
-          <FaPlus />
+          <FaPlus className="btn-icon" />
           Add Product
         </button>
       </div>

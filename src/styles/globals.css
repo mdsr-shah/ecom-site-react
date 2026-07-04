@@ -690,7 +690,6 @@ main {
 .product-card p,
 .story-card p {
   margin: 0;
-  color: var(--color-muted);
   font-weight: 700;
 }
 
@@ -722,7 +721,6 @@ main {
   aspect-ratio: 4/5;
   object-fit: cover;
   border-radius: 8px;
-  margin-bottom: 16px;
 }
 
 .product-card:hover{
@@ -1521,8 +1519,40 @@ main {
 .product-price {
   margin: 0 0 16px 0;
   font-size: 16px;
+  color: red;
 }
 
 .add-to-cart-btn {
   margin-top: auto;
+}
+
+/* ====================== SHOW DETAILS BUTTON ====================== */
+
+.details-btn {
+  width: 100%;
+  margin-top: 12px;
+  margin-bottom: 7px;
+  padding: 9px 18px;
+
+  border: 1px solid #111;
+  border-radius: 8px;
+
+  background: #fff;
+  color: #111;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.details-btn:hover {
+  background: #111;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.details-btn:active {
+  transform: scale(0.98);
 }

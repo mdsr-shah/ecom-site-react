@@ -9,6 +9,7 @@ const checkoutRoutes = require("./routes/checkoutRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const customerRoutes = require("./routes/customerRoutes");
 const settingsRoutes = require("./routes/settingsRoutes");
+const categoryRoutes = require("./routes/categoryRoutes");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use("/checkout",checkoutRoutes);
 app.use("/orders",orderRoutes)
 app.use("/customers",customerRoutes)
 app.use("/settings",settingsRoutes)
+app.use("/categories",categoryRoutes)
 
 // Test Route
 app.get("/", (req, res) => {

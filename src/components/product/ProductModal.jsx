@@ -8,7 +8,7 @@ const ProductModal = ({ product, isOpen, onClose }) => {
 
   if (!isOpen || !product) return null;
 
-  const price = Math.round(product.price * 280);
+  const price = Number(product.price);
 
   const handleAddToCart = () => {
     if (!selectedColor || !selectedSize) {
@@ -20,7 +20,7 @@ const ProductModal = ({ product, isOpen, onClose }) => {
       product_id: product.product_id,
       name: product.title,
       price: price,
-      image: product.thumbnail,
+      image: product.image_url,
       color: selectedColor,
       size: selectedSize
     });
@@ -36,7 +36,7 @@ const ProductModal = ({ product, isOpen, onClose }) => {
 
         <div className="product-modal-grid">
           <div className="product-modal-image">
-            <img src={product.thumbnail} alt={product.title} />
+            <img src={product.image_url} alt={product.title} />
           </div>
 
           <div>

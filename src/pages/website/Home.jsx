@@ -5,6 +5,7 @@ import CartDrawer from '../../components/layout/CartDrawer';
 import CategoryDirectory from '../../components/category/Category'
 import { womenCategories } from '../../data/womenCategories';
 import SearchOverlay from '../../components/website/SearchOverlay';
+import ProductModal from '../../components/product/ProductModal';
 import axios from 'axios';
 
 const Home = () => {
@@ -15,6 +16,8 @@ const Home = () => {
   const { addToCart } = useCart();
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
 useEffect(() => {
   axios
@@ -29,12 +32,17 @@ useEffect(() => {
     });
 }, []);
 
+  const handleShowDetails = (product) => {
+    setSelectedProduct(product);
+    setShowModal(true);
+  };
+
   const handleAddToCart = (product) => {
     const cartProduct = {
-      id: product._product_id,
+      id: product.product_id,
       name: product.title,
       price: Math.round(product.price * 280), // Convert to PKR
-      image: product.thumbnail
+      image: product.image_url
     };
     addToCart(cartProduct);
   };
@@ -87,6 +95,7 @@ const womenProducts = products.filter(
     ) : (
     <>
     <ProductGrid products={womenProducts.slice(0, visibleProducts)}
+      onShowDetails={handleShowDetails}
     />
   
   {visibleProducts < products.length && (
@@ -104,6 +113,15 @@ const womenProducts = products.filter(
 </section>
 
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+        <ProductModal
+
+    product={selectedProduct}
+
+    isOpen={showModal}
+
+    onClose={() => setShowModal(false)}
+
+/>
     </>
   );
 };

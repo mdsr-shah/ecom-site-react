@@ -3,8 +3,26 @@ const productModel = require("../models/productModel");
 // GET all products
 const getProducts = async (req, res) => {
     try {
-        const products = await productModel.getAllProducts();
 
+        const page = Number(req.query.page) || 1;
+
+const limit = Number(req.query.limit) || 10;
+
+const search = req.query.search || "";
+
+const category = req.query.category || "";
+
+const products = await productModel.getAllProducts(
+
+    page,
+
+    limit,
+
+    search,
+
+    category
+
+);
         res.status(200).json(products);
 
     } catch (error) {

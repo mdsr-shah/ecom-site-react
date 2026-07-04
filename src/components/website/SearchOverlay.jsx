@@ -1,10 +1,22 @@
 import { useState, useEffect, useMemo } from "react";
+import ProductModal from "../product/ProductModal";
 import axios from "axios";
 import { Search, X } from "lucide-react";
 
 const SearchOverlay = ({ isOpen, onClose }) => {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(null);
+const [showModal, setShowModal] = useState(false);
+
+const handleShowDetails = (product) => {
+    setSelectedProduct(product);
+    setShowModal(true);
+
+    // Optional: close the search overlay behind the modal
+    // onClose();
+};
+
 
   useEffect(() => {
     if (!isOpen) return;
@@ -145,31 +157,38 @@ const SearchOverlay = ({ isOpen, onClose }) => {
 
               {filteredProducts.map((product) => (
 
-                <div
-                  className="search-card"
-                  key={product.product_id}
-                >
+               <div
+  className="search-card"
+  key={product.product_id}
+>
 
-                  <img
-                    src={product.image_url}
-                    alt={product.title}
-                  />
+  <img
+    src={product.image_url}
+    alt={product.title}
+  />
 
-                  <div className="search-card-body">
+  <div className="search-card-body">
 
-                    <h4>{product.title}</h4>
+    <h4>{product.title}</h4>
 
-                    <p>
-                      {product.description}
-                    </p>
+    <p>
+      {product.description?.substring(0, 70)}...
+    </p>
 
-                    <span>
-                      Rs. {product.price}
-                    </span>
+    <span>
+      Rs. {product.price}
+    </span>
 
-                  </div>
+    <button
+      className="details-btn"
+      onClick={() => handleShowDetails(product)}
+    >
+      Show Details
+    </button>
 
-                </div>
+  </div>
+
+</div>
 
               ))}
 
@@ -180,6 +199,11 @@ const SearchOverlay = ({ isOpen, onClose }) => {
         </div>
 
       </div>
+      <ProductModal
+    product={selectedProduct}
+    isOpen={showModal}
+    onClose={() => setShowModal(false)}
+/>
     </>
   );
 };

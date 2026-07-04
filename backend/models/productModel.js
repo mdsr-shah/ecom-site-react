@@ -1,9 +1,90 @@
 const pool = require("../config/db");
 
 // Get all products
-const getAllProducts = async () => {
-    const result = await pool.query("SELECT * FROM products ORDER BY product_id");
-    return result.rows;
+const getAllProducts = async (
+    page = 1,
+    limit = 10,
+    search = "",
+    category = ""
+) => {
+
+    const offset = (page - 1) * limit;
+
+    let values = [];
+    let where = [];
+
+    if (search) {
+        values.push(`%${search}%`);
+        where.push(`p.title ILIKE $${values.length}`);
+    }
+
+    if (category) {
+        values.push(category);
+        where.push(`p.category_id = $${values.length}`);
+    }
+
+    const whereClause =
+        where.length > 0
+            ? `WHERE ${where.join(" AND ")}`
+            : "";
+
+    values.push(limit);
+    values.push(offset);
+
+    const products = await pool.query(
+
+        `
+        SELECT
+            p.*,
+            c.name AS category_name
+
+        FROM products p
+
+        LEFT JOIN categories c
+        ON p.category_id = c.category_id
+
+        ${whereClause}
+
+        ORDER BY p.product_id
+
+        LIMIT $${values.length - 1}
+        OFFSET $${values.length}
+        `,
+
+        values
+
+    );
+
+    const countResult = await pool.query(
+
+        `
+        SELECT COUNT(*)
+
+        FROM products p
+
+        ${whereClause}
+        `,
+
+        values.slice(0, values.length - 2)
+
+    );
+
+    const totalProducts = Number(countResult.rows[0].count);
+
+    return {
+
+        products: products.rows,
+
+        totalProducts,
+
+        totalPages: Math.ceil(totalProducts / limit),
+
+        currentPage: page,
+
+        limit
+
+    };
+
 };
 
 // Get one product by ID

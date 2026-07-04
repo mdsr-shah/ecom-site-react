@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ProductToolbar from "../../components/admin/ProductToolbar";
 import ProductModal from "../../components/admin/ProductModal";
 import ProductTable from "../../components/admin/ProductTable";
+import Pagination from "../../components/admin/Pagination";
 
 import { getProducts } from "../../services/productService";
 
@@ -18,13 +19,23 @@ const Products = () => {
 
   const [category, setCategory] = useState("");
 
+  const [page, setPage] = useState(1);
+
+  const limit = 10;
+
+  const [totalPages, setTotalPages] = useState(1);
+
+  const [totalProducts, setTotalProducts] = useState(0);
+
   const fetchProducts = async () => {
 
     try {
 
-      const data = await getProducts();
+      const data = await getProducts(page, limit, search,category);
 
-      setProducts(data);
+      setProducts(data.products);
+      setTotalPages(data.totalPages);
+      setTotalProducts(data.totalProducts);
 
     } catch (err) {
 
@@ -38,19 +49,14 @@ const Products = () => {
 
     fetchProducts();
 
-  }, []);
+  }, [page,search,category]);
 
-const filteredProducts = (products || []).filter((product) => {
-  const matchesSearch = product.title
-    .toLowerCase()
-    .includes(search.toLowerCase());
 
-  const matchesCategory =
-    category === "" ||
-    product.category_id === Number(category);
+    useEffect(() => {
+        setPage(1); // Reset to first page when search or category changes
+    }, [search, category]);
 
-  return matchesSearch && matchesCategory;
-});
+
 
   return (
     <>
@@ -72,10 +78,19 @@ const filteredProducts = (products || []).filter((product) => {
 />
 
       <ProductTable
-        products={filteredProducts}
+        products={products}
         fetchProducts={fetchProducts}
         setEditingProduct={setEditingProduct}
         setShowModal={setShowModal}
+      />
+
+      <Pagination 
+        page={page}
+        limit={limit}
+        totalProducts={totalProducts}
+        totalPages={totalPages}
+        setPage={setPage}
+
       />
 
     </>
