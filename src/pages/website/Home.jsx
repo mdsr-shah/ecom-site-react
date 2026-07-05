@@ -23,7 +23,7 @@ useEffect(() => {
   axios
     .get("http://localhost:5000/products")
     .then((res) => {
-      setProducts(res.data);
+      setProducts(res.data.products);
       setLoading(false);
     })
     .catch((err) => {
@@ -53,7 +53,7 @@ useEffect(() => {
 
 };
 
-const womenProducts = products.filter(
+const womenProducts = (products || []).filter(
   product => product.category_id === 1
 );
 
