@@ -15,7 +15,7 @@ const ProductModal = ({
     price: "",
     stock: "",
     category_id: "",
-    image_url: "",
+    image: null,
   });
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const ProductModal = ({
         price: editingProduct.price,
         stock: editingProduct.stock,
         category_id: editingProduct.category_id,
-        image_url: editingProduct.image_url,
+        image: null,
       });
 
     } else {
@@ -39,7 +39,7 @@ const ProductModal = ({
         price: "",
         stock: "",
         category_id: "",
-        image_url: "",
+        image: null,
       });
 
     }
@@ -58,41 +58,56 @@ const ProductModal = ({
 
   };
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
 
     e.preventDefault();
 
     try {
 
-      if (editingProduct) {
+        const data = new FormData();
 
-        await updateProduct(editingProduct.product_id, formData);
+        data.append("title", formData.title);
+        data.append("description", formData.description);
+        data.append("price", formData.price);
+        data.append("stock", formData.stock);
+        data.append("category_id", formData.category_id);
 
-        alert("Product Updated!");
+        if (formData.image) {
+            data.append("image", formData.image);
+        }
 
-      } else {
+        if (editingProduct) {
 
-        await createProduct(formData);
+            await updateProduct(
+                editingProduct.product_id,
+                data
+            );
 
-        alert("Product Added!");
+            alert("Product Updated!");
 
-      }
+        } else {
 
-      fetchProducts();
+            await createProduct(data);
 
-      setShowModal(false);
+            alert("Product Added!");
 
-      setEditingProduct(null);
+        }
+
+        fetchProducts();
+
+        setShowModal(false);
+
+        setEditingProduct(null);
 
     } catch (err) {
 
-      console.error(err);
+        console.error(err);
 
-      alert("Operation Failed");
+        alert("Operation Failed");
 
     }
 
-  };
+};
 
   if (!showModal) return null;
 
@@ -182,11 +197,12 @@ const ProductModal = ({
 
             </select>
 
+            <label>Product Image</label>
             <input
-              name="image_url"
-              placeholder="Image URL"
-              value={formData.image_url}
-              onChange={handleChange}
+            type="file"
+              name="image"
+              accept="image/*"
+              onChange={(e)=> setFormData({ ...formData, image: e.target.files[0] })}
               required
             />
 

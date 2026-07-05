@@ -8,6 +8,7 @@ const SearchOverlay = ({ isOpen, onClose }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
 const [showModal, setShowModal] = useState(false);
+const IMAGE_URL = "http://localhost:5000/";
 
 const handleShowDetails = (product) => {
     setSelectedProduct(product);
@@ -163,7 +164,7 @@ const handleShowDetails = (product) => {
 >
 
   <img
-    src={product.image_url}
+    src={`${IMAGE_URL}${product.image_url}`}
     alt={product.title}
   />
 

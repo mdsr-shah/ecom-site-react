@@ -1,74 +1,39 @@
 @use "../abstracts/breakpoints" as *;
 @use "../abstracts/variables" as *;
 
-@include tablet{
+@include tablet {
 
     .sidebar{
-
         width:220px;
-
     }
 
     .admin-main{
-
         margin-left:220px;
-
     }
 
 }
 
-@include mobile{
-
-    .sidebar{
-
-        width:100%;
-
-        height:auto;
-
-        position:relative;
-
-    }
-
-    .admin-layout{
-
-        flex-direction:column;
-
-    }
+@include mobile {
 
     .admin-main{
-
         margin-left:0;
-
     }
 
     .topbar{
-
-        padding:15px;
-
-        flex-direction:column;
-
-        gap:15px;
-
-        height:auto;
-
+        padding:15px 20px;
     }
 
     .stats-grid{
-
         grid-template-columns:1fr;
-
     }
 
     .product-form form{
-
         grid-template-columns:1fr;
-
     }
 
     .product-table{
-
         font-size:14px;
-
+        overflow-x:auto;
     }
 
 }

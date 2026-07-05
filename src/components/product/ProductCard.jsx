@@ -6,13 +6,14 @@ const ProductCard = ({
 }) => {
 
   const { addToCart } = useCart();
+  const IMAGE_URL = "http://localhost:5000/";
 
   return (
 
     <article className="product-card">
 
       <img
-        src={product.image_url}
+        src={`${IMAGE_URL}${product.image_url}`}
         alt={product.title}
         className="product-image"
       />

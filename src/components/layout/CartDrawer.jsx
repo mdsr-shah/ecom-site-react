@@ -9,6 +9,8 @@ const CartDrawer = ({ isOpen, onClose }) => {
     cartTotal,
   } = useCart();
 
+  const IMAGE_URL = "http://localhost:5000/";
+
   // Don't render anything if closed
   if (!isOpen) return null;
 
@@ -69,7 +71,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
                 >
 
                   <img
-                    src={item.image}
+                    src={`${IMAGE_URL}${item.image}`}
                     alt={item.name}
                     className="cart-item-thumb"
                   />

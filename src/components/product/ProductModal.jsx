@@ -5,6 +5,8 @@ const ProductModal = ({ product, isOpen, onClose }) => {
   const { addToCart } = useCart();
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
+  const IMAGE_URL = "http://localhost:5000/";
+
 
   if (!isOpen || !product) return null;
 
@@ -36,7 +38,7 @@ const ProductModal = ({ product, isOpen, onClose }) => {
 
         <div className="product-modal-grid">
           <div className="product-modal-image">
-            <img src={product.image_url} alt={product.title} />
+            <img src={`${IMAGE_URL}${product.image_url}`} alt={product.title} />
           </div>
 
           <div>

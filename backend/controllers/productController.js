@@ -66,8 +66,11 @@ const getProduct = async (req, res) => {
 const addProduct = async (req, res) => {
 
     try {
-
-        const newProduct = await productModel.createProduct(req.body);
+        const productData = { ...req.body };
+        if(req.file) {
+            productData.image_url = `/uploads/${req.file.filename}`;
+        }
+        const newProduct = await productModel.createProduct(productData);
 
         res.status(201).json({
             message: "Product created successfully",
@@ -93,9 +96,14 @@ const editProduct = async (req, res) => {
 
         const id = req.params.id;
 
+        const productData = { ...req.body };
+        if(req.file) {
+            productData.image_url = `/uploads/${req.file.filename}`;
+        }
+
         const updatedProduct = await productModel.updateProduct(
             id,
-            req.body
+            productData
         );
 
         if (!updatedProduct) {

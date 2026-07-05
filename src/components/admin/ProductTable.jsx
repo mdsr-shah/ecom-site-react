@@ -29,6 +29,8 @@ const ProductTable = ({
   }
 };
 
+  const IMAGE_URL = "http://localhost:5000";
+
   
   
     return (
@@ -55,7 +57,7 @@ const ProductTable = ({
 
               <td>
                 <img
-                  src={product.image_url}
+                  src={`${IMAGE_URL}${product.image_url}`}
                   alt={product.title}
                   width="60"
                 />

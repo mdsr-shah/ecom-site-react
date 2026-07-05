@@ -9,6 +9,7 @@ const OrderModal = ({
 }) => {
 
   const [status, setStatus] = useState("");
+  const IMAGE_URL = "http://localhost:5000/";
 
   useEffect(() => {
 
@@ -90,7 +91,7 @@ const OrderModal = ({
                 >
 
                   <img
-                    src={item.image_url}
+                    src={`${IMAGE_URL}${item.image_url}`}
                     alt={item.title}
                   />
 

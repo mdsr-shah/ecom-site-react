@@ -1,11 +1,20 @@
-import { FaBell, FaUserCircle } from "react-icons/fa";
+import { FaBars, FaBell, FaUserCircle } from "react-icons/fa";
 
-const Topbar = () => {
+const Topbar = ({ setSidebarOpen }) => {
   return (
     <header className="topbar">
 
-      <div>
+      <div className="topbar-left">
+
+        <button
+          className="menu-btn"
+          onClick={() => setSidebarOpen(true)}
+        >
+          <FaBars />
+        </button>
+
         <h2>Admin Dashboard</h2>
+
       </div>
 
       <div className="topbar-right">

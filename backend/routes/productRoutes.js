@@ -1,21 +1,35 @@
 const express = require("express");
 const router = express.Router();
+
 const authenticateAdmin = require("../middleware/authMiddleware");
 const productController = require("../controllers/productController");
+const upload = require("../middleware/upload");
 
-// GET all products
+// GET
 router.get("/", productController.getProducts);
-
-// GET product by ID
 router.get("/:id", productController.getProduct);
 
-// POST new product
-router.post("/",authenticateAdmin, productController.addProduct);
+// POST
+router.post(
+    "/",
+    authenticateAdmin,
+    upload.single("image"),
+    productController.addProduct
+);
 
-// PUT update product
-router.put("/:id",authenticateAdmin, productController.editProduct);
+// PUT
+router.put(
+    "/:id",
+    authenticateAdmin,
+    upload.single("image"),
+    productController.editProduct
+);
 
-// DELETE product
-router.delete("/:id",authenticateAdmin, productController.removeProduct);
+// DELETE
+router.delete(
+    "/:id",
+    authenticateAdmin,
+    productController.removeProduct
+);
 
 module.exports = router;

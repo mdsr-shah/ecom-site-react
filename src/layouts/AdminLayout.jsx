@@ -1,26 +1,45 @@
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../components/admin/Sidebar";
 import Topbar from "../components/admin/Topbar";
 import "../styles/admin.scss";
 
 const AdminLayout = () => {
-  return (
-    <div className="admin-layout">
 
-      <Sidebar />
+    const [sidebarOpen,setSidebarOpen]=useState(false);
 
-      <div className="admin-main">
+    return (
 
-        <Topbar />
+        <div className="admin-layout">
 
-        <main className="admin-content">
-          <Outlet />
-        </main>
+            <Sidebar
+                open={sidebarOpen}
+                setOpen={setSidebarOpen}
+            />
 
-      </div>
+            {sidebarOpen && (
+                <div
+                    className="sidebar-backdrop"
+                    onClick={()=>setSidebarOpen(false)}
+                />
+            )}
 
-    </div>
-  );
+            <div className="admin-main">
+
+                <Topbar
+                    setSidebarOpen={setSidebarOpen}
+                />
+
+                <main className="admin-content">
+                    <Outlet/>
+                </main>
+
+            </div>
+
+        </div>
+
+    );
+
 };
 
 export default AdminLayout;
