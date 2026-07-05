@@ -20,13 +20,14 @@ import Settings from "./pages/admin/Settings";
 
 import Login from "./pages/admin/Login";
 import ProtectedRoute from "./routes/ProtectedRoute"
+import ScrollToTop from "./components/website/ScrollToTop";
 
 
 function App() {
   return (
 
       <Router>
-
+        <ScrollToTop />
         <Routes>
 
           {/* WEBSITE */}

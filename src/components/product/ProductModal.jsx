@@ -5,7 +5,7 @@ const ProductModal = ({ product, isOpen, onClose }) => {
   const { addToCart } = useCart();
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
-  const IMAGE_URL = "http://localhost:5000/";
+  const IMAGE_URL = "http://localhost:5000";
 
 
   if (!isOpen || !product) return null;
@@ -32,7 +32,7 @@ const ProductModal = ({ product, isOpen, onClose }) => {
   return (
     <div className="modal" style={{ display: 'flex' }}>
       <div className="modal-content">
-        <button onClick={onClose} style={{ position: 'absolute', top: '20px', right: '20px', fontSize: '28px' }}>
+        <button onClick={onClose}>
           ✕
         </button>
 

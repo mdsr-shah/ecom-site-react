@@ -68,9 +68,9 @@ orders.map(order=>(
 
 <td>
 
-<span className={`status ${order.order_status.toLowerCase()}`}>
+<span className={`status ${(order.order_status || "pending").toLowerCase()}`}>
 
-{order.order_status}
+{order.order_status || "Pending"}
 
 </span>
 

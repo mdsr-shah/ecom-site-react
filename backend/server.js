@@ -11,6 +11,7 @@ const orderRoutes = require("./routes/orderRoutes");
 const customerRoutes = require("./routes/customerRoutes");
 const settingsRoutes = require("./routes/settingsRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
+const notificationRoutes = require("./routes/notificationRoutes");
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use("/customers",customerRoutes)
 app.use("/settings",settingsRoutes)
 app.use("/categories",categoryRoutes)
 app.use("/uploads", express.static("uploads"));
+app.use("/notifications", notificationRoutes);
 
 // Test Route
 app.get("/", (req, res) => {

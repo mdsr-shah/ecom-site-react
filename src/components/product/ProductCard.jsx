@@ -41,7 +41,7 @@ const ProductCard = ({
           className="add-to-cart-btn"
           onClick={() =>
             addToCart({
-              id: product.product_id,
+              product_id: product.product_id,
               name: product.title,
               price: product.price,
               image: product.image_url

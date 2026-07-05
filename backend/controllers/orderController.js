@@ -13,7 +13,7 @@ exports.getOrder = async (req, res) => {
 exports.updateOrderStatus = async (req, res) => {
   await Order.updateStatus(
     req.params.id,
-    req.body.status
+    req.body.order_status
   );
 
   res.json({

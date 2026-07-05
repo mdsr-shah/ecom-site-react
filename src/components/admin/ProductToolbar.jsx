@@ -37,8 +37,8 @@ const ProductToolbar = ({
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-
-        <select
+       
+        <select 
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         >
@@ -47,7 +47,7 @@ const ProductToolbar = ({
           <option value="2">Men</option>
           <option value="3">Kids</option>
         </select>
-
+        
       </div>
 
     </div>

@@ -10,6 +10,10 @@ const Checkout = () => {
   const [showModal, setShowModal] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -51,7 +55,13 @@ const handleSubmit = async (e) => {
 
     };
 
-    console.log(cart);
+    console.log("======== CART =========");
+    cart.forEach((item, index) => {
+      console.log(`Item ${index + 1}`);
+      console.log(item);
+      console.log("product_id:", item.product_id);
+      console.log("id", item.id);
+    });
     console.log(orderData);
 
     const response = await placeOrder(orderData);

@@ -92,6 +92,8 @@ const Settings = () => {
 
           onChange={handleChange}
 
+          readOnly
+
         />
 
         <label>
@@ -109,6 +111,8 @@ const Settings = () => {
           value={form.email}
 
           onChange={handleChange}
+
+          readOnly
 
         />
 

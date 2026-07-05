@@ -9,7 +9,7 @@ const OrderModal = ({
 }) => {
 
   const [status, setStatus] = useState("");
-  const IMAGE_URL = "http://localhost:5000/";
+  const IMAGE_URL = "http://localhost:5000";
 
   useEffect(() => {
 
@@ -143,7 +143,7 @@ const OrderModal = ({
         <div className="admin-modal-footer">
 
           <button
-            className="btn-primary"
+            className="btn-success"
             onClick={handleSave}
           >
 

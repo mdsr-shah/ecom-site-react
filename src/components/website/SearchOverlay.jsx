@@ -8,7 +8,7 @@ const SearchOverlay = ({ isOpen, onClose }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
 const [showModal, setShowModal] = useState(false);
-const IMAGE_URL = "http://localhost:5000/";
+const IMAGE_URL = "http://localhost:5000";
 
 const handleShowDetails = (product) => {
     setSelectedProduct(product);
@@ -23,7 +23,7 @@ const handleShowDetails = (product) => {
     if (!isOpen) return;
 
     axios
-      .get("http://localhost:5000/products")
+      .get("http://localhost:5000/products/all")
       .then((res) => setProducts(res.data))
       .catch((err) => console.log(err));
   }, [isOpen]);

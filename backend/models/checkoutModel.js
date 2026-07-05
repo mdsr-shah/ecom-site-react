@@ -70,6 +70,17 @@ const placeOrder = async (orderData) => {
 
     const orderId = order.rows[0].order_id;
 
+    await client.query(
+      `
+      INSERT INTO notifications
+      (title, message)
+      VALUES($1,$2)`,
+      [
+        "New Order Placed",
+        `A new order with ID ${orderId} has been placed.`,
+      ]
+    );
+
     // Order Items
     for (const item of cart) {
       await client.query(
