@@ -4,7 +4,7 @@ import ProductGrid from '../../components/product/ProductGrid';
 import CartDrawer from '../../components/layout/CartDrawer';
 import CategoryDirectory from '../../components/category/Category'
 import { menCategories } from '../../data/menCategories';
-import axios from 'axios'; 
+import api from '../../services/api';
 
 const Men = () => {
   const [products, setProducts] = useState([]);
@@ -14,7 +14,7 @@ const Men = () => {
   const { addToCart } = useCart();
 
 useEffect(() => {
-  axios.get("/products/all")
+  api.get("/products/all")
     .then((res) => {
       setProducts(res.data);
       setLoading(false);

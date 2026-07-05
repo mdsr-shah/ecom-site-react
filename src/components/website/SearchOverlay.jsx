@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import ProductModal from "../product/ProductModal";
-import axios from "axios";
 import { Search, X } from "lucide-react";
+import api from "../../services/api";
 
 const SearchOverlay = ({ isOpen, onClose }) => {
   const [products, setProducts] = useState([]);
@@ -22,7 +22,7 @@ const handleShowDetails = (product) => {
   useEffect(() => {
     if (!isOpen) return;
 
-    axios
+    api
       .get("/products/all")
       .then((res) => setProducts(res.data))
       .catch((err) => console.log(err));

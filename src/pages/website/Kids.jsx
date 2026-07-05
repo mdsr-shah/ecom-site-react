@@ -5,7 +5,8 @@ import CartDrawer from '../../components/layout/CartDrawer';
 import CategoryDirectory from '../../components/category/Category'
 import { menCategories } from '../../data/menCategories';
 import { kidsCategories } from '../../data/kidsCategories';
-import axios from 'axios';
+
+import api from '../../services/api';
 
 
 const Kids = () => {
@@ -16,7 +17,7 @@ const Kids = () => {
   const { addToCart } = useCart();
 
 useEffect(() => {
-  axios.get("/products/all")
+  api.get("/products/all")
     .then((res) => {
       setProducts(res.data);
       setLoading(false);
