@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const API="http://localhost:5000/customers";
+import api from "./api";
 
 export const getCustomers=async()=>{
 
-const response=await axios.get(API);
+const response=await api.get("/customers");
 
 return response.data;
 

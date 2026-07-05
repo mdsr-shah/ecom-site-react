@@ -1,8 +1,6 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:5000/checkout";
+import api from "./api";
 
 export const placeOrder = async (orderData) => {
-  const response = await axios.post(API_URL, orderData);
+  const response = await api.post("/checkout", orderData);
   return response.data;
 };

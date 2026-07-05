@@ -5,7 +5,7 @@ const ProductModal = ({ product, isOpen, onClose }) => {
   const { addToCart } = useCart();
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
-  const IMAGE_URL = "http://localhost:5000";
+  const IMAGE_URL = import.meta.env.VITE_API_URL;
 
 
   if (!isOpen || !product) return null;

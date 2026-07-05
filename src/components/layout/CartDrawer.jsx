@@ -9,7 +9,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
     cartTotal,
   } = useCart();
 
-  const IMAGE_URL = "http://localhost:5000";
+  const IMAGE_URL = import.meta.env.VITE_API_URL;
 
   // Don't render anything if closed
   if (!isOpen) return null;

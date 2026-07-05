@@ -1,18 +1,16 @@
-import axios from "axios";
-
-const API = "http://localhost:5000/notifications";
+import api from "./api";
 
 export const getNotifications = async () => {
-  const res = await axios.get(API);
+  const res = await api.get("/notifications");
   return res.data;
 };
 
 export const getUnreadCount = async () => {
-  const res = await axios.get(`${API}/count`);
+  const res = await api.get("/notifications/count");
   return res.data;
 };
 
 export const markAllRead = async () => {
-  const res = await axios.put(`${API}/read`);
+  const res = await api.put("/notifications/read");
   return res.data;
 };

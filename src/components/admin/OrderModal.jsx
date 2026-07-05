@@ -9,7 +9,7 @@ const OrderModal = ({
 }) => {
 
   const [status, setStatus] = useState("");
-  const IMAGE_URL = "http://localhost:5000";
+  const IMAGE_URL = import.meta.env.VITE_API_URL; // 
 
   useEffect(() => {
 

@@ -6,7 +6,7 @@ import CategoryDirectory from '../../components/category/Category'
 import { womenCategories } from '../../data/womenCategories';
 import SearchOverlay from '../../components/website/SearchOverlay';
 import ProductModal from '../../components/product/ProductModal';
-import axios from 'axios';
+import api from '../../services/api';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -20,8 +20,7 @@ const Home = () => {
   const [showModal, setShowModal] = useState(false);
 
 useEffect(() => {
-  axios
-    .get("http://localhost:5000/products/all")
+  api.get("/products/all")
     .then((res) => {
       setProducts(res.data);
       setLoading(false);

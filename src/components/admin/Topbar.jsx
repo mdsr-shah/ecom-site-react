@@ -1,27 +1,26 @@
 import { useEffect, useState } from "react";
 import { FaBars, FaBell, FaUserCircle } from "react-icons/fa";
-import axios from "axios";
+
+import api from "../../services/api";
 
 const Topbar = ({ setSidebarOpen }) => {
   const [notifications, setNotifications] = useState([]);
   const [count, setCount] = useState(0);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const fetchNotifications = async () => {
-    try {
-      const countRes = await axios.get(
-        "http://localhost:5000/notifications/count"
-      );
-      setCount(Number(countRes.data.count));
+const fetchNotifications = async () => {
+  try {
+    const [countRes, notifRes] = await Promise.all([
+      api.get("/notifications/count"),
+      api.get("/notifications"),
+    ]);
 
-      const notifRes = await axios.get(
-        "http://localhost:5000/notifications"
-      );
-      setNotifications(notifRes.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    setCount(Number(countRes.data.count));
+    setNotifications(notifRes.data);
+  } catch (err) {
+    console.error("Notification error:", err.message);
+  }
+};
 
   useEffect(() => {
     fetchNotifications();
@@ -35,7 +34,7 @@ const Topbar = ({ setSidebarOpen }) => {
     setShowDropdown(!showDropdown);
 
     if (!showDropdown && count > 0) {
-      await axios.put("http://localhost:5000/notifications/read");
+      await api.put("/notifications/read");
       setCount(0);
       fetchNotifications();
     }

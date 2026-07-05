@@ -1,19 +1,17 @@
-import axios from "axios";
-
-const API = "http://localhost:5000/orders";
+import api from "./api";
 
 export const getOrders = async () => {
-    const res = await axios.get(API);
+    const res = await api.get("/orders");
     return res.data;
 };
 
 export const getOrder = async(id)=>{
-    const res = await axios.get(`${API}/${id}`);
+    const res = await api.get(`/orders/${id}`);
     return res.data;
 };
 
 export const updateOrderStatus = async(id,status)=>{
-    const res = await axios.put(`${API}/${id}`,{
+    const res = await api.put(`/orders/${id}`,{
         order_status:status
     });
     return res.data;

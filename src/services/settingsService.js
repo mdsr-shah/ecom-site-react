@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const API = "http://localhost:5000/settings";
+import api from "./api";
 
 export const getSettings = async () => {
 
-  const response = await axios.get(API);
+  const response = await api.get("/settings");
 
   return response.data;
 
@@ -12,7 +10,7 @@ export const getSettings = async () => {
 
 export const updateSettings = async (data) => {
 
-  const response = await axios.put(API, data);
+  const response = await api.put("/settings", data);
 
   return response.data;
 

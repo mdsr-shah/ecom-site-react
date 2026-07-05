@@ -16,7 +16,7 @@ const Kids = () => {
   const { addToCart } = useCart();
 
 useEffect(() => {
-  axios.get("http://localhost:5000/products/all")
+  axios.get("/products/all")
     .then((res) => {
       setProducts(res.data);
       setLoading(false);
