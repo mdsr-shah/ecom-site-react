@@ -154,10 +154,29 @@ const removeProduct = async (req, res) => {
 
 };
 
+const getAllWebsiteProducts = async (req, res) => {
+    try {
+
+        const products = await productModel.getAllProducts(
+            1,
+            100000
+        );
+
+        res.json(products.products);
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            message: "Error fetching products"
+        });
+    }
+};
+
 module.exports = {
     getProducts,
     getProduct,
     addProduct,
     editProduct,
-    removeProduct
+    removeProduct,
+    getAllWebsiteProducts
 };

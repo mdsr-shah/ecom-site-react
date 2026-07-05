@@ -7,6 +7,7 @@ const upload = require("../middleware/upload");
 
 // GET
 router.get("/", productController.getProducts);
+router.get("/all",productController.getAllWebsiteProducts);
 router.get("/:id", productController.getProduct);
 
 // POST

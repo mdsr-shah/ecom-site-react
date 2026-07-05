@@ -21,9 +21,9 @@ const Home = () => {
 
 useEffect(() => {
   axios
-    .get("http://localhost:5000/products")
+    .get("http://localhost:5000/products/all")
     .then((res) => {
-      setProducts(res.data.products);
+      setProducts(res.data);
       setLoading(false);
     })
     .catch((err) => {
@@ -98,7 +98,7 @@ const womenProducts = (products || []).filter(
       onShowDetails={handleShowDetails}
     />
   
-  {visibleProducts < products.length && (
+  {visibleProducts < womenProducts.length && (
   <div className="load-more-wrapper">
       <button className="load-more-btn" onClick={loadMoreProducts}>
         Load More

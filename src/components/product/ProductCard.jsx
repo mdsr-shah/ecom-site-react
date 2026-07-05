@@ -6,7 +6,7 @@ const ProductCard = ({
 }) => {
 
   const { addToCart } = useCart();
-  const IMAGE_URL = "http://localhost:5000/";
+  const IMAGE_URL = "http://localhost:5000";
 
   return (
 

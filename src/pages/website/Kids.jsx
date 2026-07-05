@@ -16,19 +16,23 @@ const Kids = () => {
   const { addToCart } = useCart();
 
 useEffect(() => {
-  axios.get("http://localhost:5000/products")
+  axios.get("http://localhost:5000/products/all")
     .then((res) => {
       setProducts(res.data);
+      setLoading(false);
+    })
+    .catch((err)=>{
+      console.error(err);
       setLoading(false);
     });
 }, []);
 
   const handleAddToCart = (product) => {
     const cartProduct = {
-      id: product.id,
+      id: product.product_id,
       name: product.title,
-      price: Math.round(product.price * 280),
-      image: product.thumbnail
+      price: product.price,
+      image: product.image_url
     };
     addToCart(cartProduct);
   };
@@ -78,7 +82,7 @@ const kidsProducts = products.filter(product => product.category_id === 3);
           <ProductGrid 
             products={kidsProducts.slice(0, visibleProducts)} />
 
-             {visibleProducts < products.length && (
+             {visibleProducts < kidsProducts.length && (
               <div className="load-more-wrapper">
                  <button className="load-more-btn" onClick={loadMoreProducts}>
                     Load More
